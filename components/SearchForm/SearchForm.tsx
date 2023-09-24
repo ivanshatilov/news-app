@@ -1,7 +1,7 @@
 import styles from './SearchForm.module.scss'
-import {BiSearch} from 'react-icons/bi'
 
 const SearchForm = () => {
+
     return (
         <div className={styles.body}>
             <form action="submit">
