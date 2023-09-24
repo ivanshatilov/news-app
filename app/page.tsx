@@ -6,22 +6,49 @@ import NewsItem from "@/components/NewsItem/NewsItem"
 import { useEffect, useState } from "react";
 import { useGetNewsQuery } from "@/store/reducers/newsApi";
 import { NewsType } from "@/types";
-import { useAppSelector } from "@/hooks";
+import { useAppDispatch, useAppSelector } from "@/hooks";
+import {newsSlice} from "@/store/reducers/newsSlice";
 
 
 export default function Home() {
 
-  const {searchValue, pageSize, sortBy} = useAppSelector(state => state.searchState)
-  const {data, isLoading, error, isFetching} = useGetNewsQuery({pageSize, searchValue, sortBy})
 
-  console.log(data)
+  const {searchValue, pageSize, sortBy} = useAppSelector(state => state.searchState)
+  const {news, totalPages, page} = useAppSelector(state => state.newsState)
+  const {setNews, setTotalPages, setPage} = newsSlice.actions;
+  const dispatch = useAppDispatch()
+
+  const {data, isLoading, error, isFetching, isSuccess} = useGetNewsQuery({pageSize, searchValue, sortBy, page})
+  
+  useEffect(() => {
+    if(data) {
+      dispatch(setNews(data.response.results))
+      dispatch(setTotalPages(data.response.pages))
+      console.log(page)
+      console.log(totalPages)
+    }
+  }, [data])
+
+  useEffect(() => {
+    document.addEventListener('scroll', scrollHandler)
+    return function() {
+      document.removeEventListener('scroll', scrollHandler);
+    }
+  }, [])
+
+  const scrollHandler = (e: any) => {
+    if(e.target.documentElement.scrollHeight - (e.target.documentElement.scrollTop + window.innerHeight) === 0) {
+      dispatch(setPage(1))
+    }
+  }
+
   return (
     <main className={styles.main}>
       <SearchForm />
       <div className={styles.news}>
         {(isLoading || isFetching) && <div className={styles.loading}><div></div><div></div><div></div><div></div></div>}
         {error && <div>Error</div>}
-        {!isFetching && data && data.response.results.map((item: NewsType) => <NewsItem item={item}/>)}
+        {!error && news && news.map((item: NewsType) => <NewsItem key={item.id} item={item}/>)}
       </div>
 
     </main>

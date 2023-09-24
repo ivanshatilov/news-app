@@ -14,7 +14,7 @@ const initialState: searchProps = {
 }
 
 export const searchSlice = createSlice({
-    name: 'news',
+    name: 'search',
     initialState,
     reducers: {
         setSearchValue: (state, action: PayloadAction<string>) => {

@@ -1,12 +1,14 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { newsAPI } from "./reducers/newsApi";
 import searchState from "./reducers/searchSlice"
+import newsState from "./reducers/newsSlice"
 
 
 export const store = configureStore({
     reducer: {
       [newsAPI.reducerPath]: newsAPI.reducer,
-      searchState
+      searchState,
+      newsState
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(newsAPI.middleware)
   })

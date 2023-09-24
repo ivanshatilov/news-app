@@ -2,11 +2,14 @@ import { useAppDispatch, useAppSelector } from '@/hooks'
 import styles from './SearchForm.module.scss'
 import {searchSlice} from '@/store/reducers/searchSlice';
 import { useState } from 'react';
+import {newsSlice} from '@/store/reducers/newsSlice';
 
 const SearchForm = () => {
     const {searchValue, pageSize, sortBy} = useAppSelector(state => state.searchState)
     const {setPageSize, setSearchValue, setSortBy} = searchSlice.actions;
     const dispatch = useAppDispatch()
+    const {news} = useAppSelector(state => state.newsState)
+    const {clearNews, clearPage} = newsSlice.actions;
 
     const [_sortBy, _setSortBy] = useState("relevance")
     const [_searchValue, _setSearchValue] = useState("")
@@ -14,6 +17,8 @@ const SearchForm = () => {
 
     const handleSubmitForm = (e: SubmitEvent) => {
         e.preventDefault();
+        dispatch(clearNews())
+        dispatch(clearPage())
         dispatch(setPageSize(_pageSize));
         dispatch(setSearchValue(_searchValue));
         dispatch(setSortBy(_sortBy));
