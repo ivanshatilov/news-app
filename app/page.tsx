@@ -3,28 +3,25 @@
 import SearchForm from "@/components/SearchForm/SearchForm"
 import styles from "./home.module.scss"
 import NewsItem from "@/components/NewsItem/NewsItem"
-import { useAppDispatch, useAppSelector } from "@/hooks"
-import { useEffect } from "react";
-import { fetchNews } from "@/store/reducers/ActionCreators";
+import { useEffect, useState } from "react";
+import { useGetNewsQuery } from "@/store/reducers/newsApi";
+import { NewsType } from "@/types";
+import { useAppSelector } from "@/hooks";
 
 
 export default function Home() {
 
-  const dispatch = useAppDispatch();
-  const {news, isLoading, error} = useAppSelector(state => state.newsReducer)
+  const {searchValue, pageSize, sortBy} = useAppSelector(state => state.searchState)
+  const {data, isLoading, error, isFetching} = useGetNewsQuery({pageSize, searchValue, sortBy})
 
-  useEffect(() => {
-    dispatch(fetchNews())
-  }, [])
-
-
+  console.log(data)
   return (
     <main className={styles.main}>
       <SearchForm />
       <div className={styles.news}>
-        {isLoading && <div className={styles.loading}><div></div><div></div><div></div><div></div></div>}
+        {(isLoading || isFetching) && <div className={styles.loading}><div></div><div></div><div></div><div></div></div>}
         {error && <div>Error</div>}
-        {news.map(item => <NewsItem item={item}/>)}
+        {!isFetching && data && data.response.results.map((item: NewsType) => <NewsItem item={item}/>)}
       </div>
 
     </main>

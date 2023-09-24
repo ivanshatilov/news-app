@@ -1,12 +1,14 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import newsReducer from './reducers/newsSlice'
+import { newsAPI } from "./reducers/newsApi";
+import searchState from "./reducers/searchSlice"
 
-const rootReducer = combineReducers({
-  newsReducer
-})
 
 export const store = configureStore({
-    reducer: rootReducer,
+    reducer: {
+      [newsAPI.reducerPath]: newsAPI.reducer,
+      searchState
+    },
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(newsAPI.middleware)
   })
   
   // Infer the `RootState` and `AppDispatch` types from the store itself
