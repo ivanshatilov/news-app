@@ -1,0 +1,54 @@
+.body {
+    height: 100%;
+    background-color: rgb(234, 234, 234);
+    overflow: auto;
+
+    .container {
+        padding: 0 24px;
+        height: 100%;
+        margin: 0 auto;
+        max-width: 1200px;
+
+        .title {
+            margin: 0;
+            padding: 48px 0 24px;
+            text-align: center;
+        }
+        .headerInfo {
+            padding: 20px 0 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            a {
+                text-decoration: none;
+            }
+        }
+        .mainImage {
+            img {
+                width: 100%;
+                    height: auto;
+            }
+        }
+        .main {
+            padding: 0px 0px 20px 0;
+            aside {
+                width: 50%;
+                blockquote {
+                    margin: 40px 0 40px 20px;
+                    font-style: italic;
+                    color: rgb(95, 95, 95);
+                }
+            }
+            figure {
+                margin: 1.5em 10px;
+                img {
+                    width: 100%;
+                    height: auto;
+                }
+                figcaption {
+                    font-style: italic;
+                }
+            }
+        }
+    }
+}
