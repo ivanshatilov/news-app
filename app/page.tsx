@@ -16,10 +16,16 @@ export default function Home() {
   const {searchValue, pageSize, sortBy} = useAppSelector(state => state.searchState)
   const {news, totalPages, page} = useAppSelector(state => state.newsState)
   const {setNews, setTotalPages, setPage} = newsSlice.actions;
+  const {clearNews, clearPage} = newsSlice.actions;
   const dispatch = useAppDispatch()
 
   const {data, isLoading, error, isFetching, isSuccess} = useGetNewsQuery({pageSize, searchValue, sortBy, page})
   
+  useEffect(() => {
+    dispatch(clearNews())
+    dispatch(clearPage())
+  }, [])
+
   useEffect(() => {
     if(data) {
       dispatch(setNews(data.response.results))
