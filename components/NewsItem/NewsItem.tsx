@@ -1,6 +1,7 @@
 import { NewsType } from '@/types'
 import styles from './NewsItem.module.scss'
 import {FaArrowRight} from 'react-icons/fa'
+import Link from 'next/link'
 
 interface NewsItemProps {
     item: NewsType
@@ -22,9 +23,9 @@ const NewsItem: React.FC<NewsItemProps> = ({item}) => {
             {item.webTitle}
         </div>
         <div className={styles.footer}>
-            <button className={styles.button}>
+            <Link href={`/articles/${item.id}`} className={styles.button}>
                 Details <FaArrowRight />
-            </button>
+            </Link>
         </div>
     
        </div>

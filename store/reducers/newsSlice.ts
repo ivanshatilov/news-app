@@ -8,8 +8,8 @@ interface newsProps {
 }
 
 const initialState: newsProps = {
-    page: 1,
-    totalPages: 2,
+    page: 1,        //
+    totalPages: 2, // Доделаю
     news: []
 }
 
@@ -31,7 +31,7 @@ export const newsSlice = createSlice({
         state.page = state.page + action.payload
        },
        clearPage: (state) => {
-        state.page = 1
+        state.page = 1      // Доделаю
        }
         
     },
