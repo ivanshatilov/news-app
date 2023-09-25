@@ -424,8 +424,11 @@ th {
   padding: 0;
 }
 
+/* My styles */
+
 html,
 body,
 :root {
   height: 100%;
 }
+

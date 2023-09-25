@@ -1,23 +1,49 @@
 .body {
     background-color: gray;
-    border-radius: 12px;
-    padding: 30px 50px;
-    margin: 36px 0;
+    padding: 40px 0px;
+    width: 100%;
+    margin: 0 0 36px 0;
+    align-items: center;
+    @media (min-width: 640px) {
+        border-radius: 12px;
+        padding: 30px 50px;
+        margin: 36px 0;
+        width: auto;
+    }
     form {
         display: flex;
         flex-direction: column;
         justify-content: center;
-        gap: 36px;
+        align-items: center;
+        gap: 10px;
         flex-wrap: wrap;
+        @media (min-width: 640px) {
+            align-items: start;
+            gap: 36px;
+        }
     }
 }
 .searchBox {
     display: flex;
-    gap: 40px;
+    flex-direction: column;
+    gap: 10px;
+    order: 2;
+    @media (min-width: 640px) {
+        flex-direction: row;
+        gap: 40px;
+        order: 1;
+    }
 }
 .selectBox {
     display: flex;
-    gap: 40px;
+    
+    gap: 20px;
+    order: 1;
+    @media (min-width: 640px) {
+        flex-direction: row;
+        gap: 40px;
+        order: 2;
+    }
 }
 .search {
     border: 1px solid #555;
@@ -46,8 +72,8 @@
     position: absolute;
     bottom: 38px;
     left: -20px;
-    font-size: 14px;
-    width: 200px;
+    font-size: 12px;
+    width: 100px;
     color: white;
 }
 .countSort {

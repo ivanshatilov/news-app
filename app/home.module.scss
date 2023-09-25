@@ -5,11 +5,17 @@
     height: 100%;
 }
 .news {
-    
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    flex-wrap: wrap;
-    gap: 50px;
+    align-items: center;
+    gap: 20px;
+    
+    @media (min-width: 640px) {
+      gap: 50px;
+      flex-wrap: wrap;
+      flex-direction: row;
+  }
 }
 
 .loading {
